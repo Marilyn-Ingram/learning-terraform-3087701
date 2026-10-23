@@ -3,7 +3,7 @@ data "aws_ami" "app_ami" {
 
   filter {
     name   = "name"
-    values = ["bitnami-tomcat-*-x86_64-hvm-ebs-nami"]
+    values = ["al2023-ami-2023.*-x86_64"]
   }
 
   filter {
@@ -11,12 +11,12 @@ data "aws_ami" "app_ami" {
     values = ["hvm"]
   }
 
-  owners = ["979382823631"] # Bitnami
+  owners = ["amazon"]
 }
 
 resource "aws_instance" "web" {
   ami           = data.aws_ami.app_ami.id
-  instance_type = "t3.nano"
+  instance_type = "t3.micro"
 
   tags = {
     Name = "HelloWorld"
